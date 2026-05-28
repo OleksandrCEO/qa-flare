@@ -49,8 +49,8 @@ function LoginPage() {
       signIn(values.login, values.password, values.remember);
       navigate({ to: "/", replace: true });
     } catch (e) {
-      if (e instanceof ApiError && (e.status === 401 || e.status === 403)) {
-        setServerError("Invalid login or password.");
+      if (e instanceof ApiError) {
+        setServerError(e.message || "Failed to sign in.");
       } else {
         setServerError(e instanceof Error ? e.message : "Failed to sign in.");
       }

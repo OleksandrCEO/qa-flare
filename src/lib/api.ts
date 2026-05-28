@@ -24,9 +24,6 @@ function authHeader(creds: string): HeadersInit {
 }
 
 async function handle(res: Response): Promise<unknown> {
-  if (res.status === 401 || res.status === 403) {
-    throw new ApiError("Unauthorized", res.status);
-  }
   if (!res.ok) {
     const text = await res.text().catch(() => "");
     throw new ApiError(text || `Request failed (${res.status})`, res.status);
